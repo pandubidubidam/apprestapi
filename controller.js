@@ -55,12 +55,25 @@ exports.ubahuser = function (req, res) {
     var nama = req.body.nama;
     var email = req.body.email;
 
-    connection.query('UPDATE user SET nik=?, nama=?, email=? WHERE id_user=?', [nik, nama, email,id],
+    connection.query('UPDATE user SET nik=?, nama=?, email=? WHERE id_user=?', [nik, nama, email, id],
         function (error, rows, fields) {
             if (error) {
                 console.log(error);
             } else {
                 response.ok("Berhasil Ubah Data", res)
+            }
+        });
+};
+
+//menghapus data berdasarkan id
+exports.hapususer = function (req, res) {
+    var id = req.body.id_user;
+    connection.query('DELETE FROM user WHERE id_user=?', [id],
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.ok("Berhasil hapus data", res)
             }
         });
 };
