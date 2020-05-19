@@ -77,3 +77,15 @@ exports.hapususer = function (req, res) {
             }
         });
 };
+
+//menampilkan dealer group
+exports.tampilgroupdealer = function (req, res) {
+    connection.query('SELECT user.id_user, user.nik, user.nama, user.email, dealer.objek, dealer.merk from pesan JOIN dealer JOIN user WHERE pesan.id_dealer = dealer.id_dealer AND pesan.id_user = user.id_user ORDER BY user.id_user',
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.oknested(rows, res)
+            }
+        });
+}
