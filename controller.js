@@ -39,11 +39,28 @@ exports.tambahuser = function (req, res) {
 
     connection.query('INSERT INTO user (nik,nama,email) VALUES(?,?,?)',
         [nik, nama, email],
-        function (error, rows, fields){
-            if(error){
+        function (error, rows, fields) {
+            if (error) {
                 console.log(error);
-            }else {
-                response.ok("berhasil menambahkan data",res)
+            } else {
+                response.ok("berhasil menambahkan data", res)
             }
         });
-}
+};
+
+//mengubah data berdasarkan id
+exports.ubahuser = function (req, res) {
+    var id = req.body.id_user;
+    var nik = req.body.nik;
+    var nama = req.body.nama;
+    var email = req.body.email;
+
+    connection.query('UPDATE user SET nik=?, nama=?, email=? WHERE id_user=?', [nik, nama, email,id],
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.ok("Berhasil Ubah Data", res)
+            }
+        });
+};
